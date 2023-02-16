@@ -52,4 +52,12 @@ async def meme(ctx):
 
     embed = Embed(title=f'__{name}__', colour=discord.Colour.random(
     ), timestamp=ctx.message.created_at, url=f'https://reddit.com{link}')
-    embed.set_author
+    embed.set_author(name=ctx.author.display_name,
+                     icon_url=ctx.author.avatar_url)
+    embed.set_image(url=url)
+    embed.set_footer(text=f'👍{likes} 💬{comments}',
+                     icon_url='https://www.vectorico.com/download/social_media/Reddit-Icon.png')
+    await.ctx.send(embed=embed)
+
+    if len(all_subs) <= 20:
+        await gen_memes()
