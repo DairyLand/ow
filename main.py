@@ -20,3 +20,12 @@ reddit = asyncpraw.Reddit(client_id='WirWugQJMWZrR8GsZGosEg',
                           password='fakepass',
                           user_agent='ow_bot'
                           )
+
+
+all_subs = []
+
+
+async def gen_memes():
+    subreddit = await reddit.subreddit('Overwatch_Memes')
+    top = subreddit.top(limit=500)
+    async for submission in top:
