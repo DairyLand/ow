@@ -61,3 +61,10 @@ async def meme(ctx):
 
     if len(all_subs) <= 20:
         await gen_memes()
+
+
+@bot.command(name='reload-meme')
+async def reload_meme(ctx):
+    msg = await ctx.send('Reloading memes ...')
+    await gen_memes()
+    await msg.edit(content='Great success! ✅')
