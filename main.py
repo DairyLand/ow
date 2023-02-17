@@ -3,12 +3,18 @@ import os
 import random
 import discord
 from discord.ext import commands
-from discord_components.client import DiscordComponents
+# from discord_components.client import DiscordComponents
+# the library above is no longer supported thus the error find a solution for  this
+# https://stackoverflow.com/questions/73793178/issues-with-the-installation-of-discord-components
 from discord import Embed
 import asyncpraw
 from random import random
 
-bot = commands.Bot(command_prefix='$')
+
+intents = discord.Intents.all()
+
+
+bot = commands.Bot(command_prefix='$', intents=intents)
 ownerid = []
 botowner = 'ThiccDaddy#1750'
 bot.remove_command('help')
@@ -34,7 +40,7 @@ async def gen_memes():
 
 @bot.event
 async def on_ready():
-    bot.loop.create_task(status_task())
+    # bot.loop.create_task(status_task())
     print('Fired up & ready!')
     DiscordComponents(bot)
     await gen_memes()
@@ -57,7 +63,7 @@ async def meme(ctx):
     embed.set_image(url=url)
     embed.set_footer(text=f'👍{likes} 💬{comments}',
                      icon_url='https://www.vectorico.com/download/social_media/Reddit-Icon.png')
-    await.ctx.send(embed=embed)
+    await ctx.send(embed=embed)
 
     if len(all_subs) <= 20:
         await gen_memes()
@@ -68,3 +74,6 @@ async def reload_meme(ctx):
     msg = await ctx.send('Reloading memes ...')
     await gen_memes()
     await msg.edit(content='Great success! ✅')
+
+
+bot.run('MTA3MzY2NjA0NjQyMDA3MDQ5MA.GSCMEY.AvJmciR-e5QqqPh2qvdBIkk6HV0QXjje7XK2Mw')
